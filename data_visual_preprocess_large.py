@@ -1,6 +1,6 @@
 ##############################################################################
 ### Raw data visualization and normalization for preparation of NN training
-### Data from LLC converter simulation on PSIM for Zuo's LLC modeling paper
+### Data from simulation on PSIM
 ### Author: Fanghao Tian
 ### Date: 2024-April-3rd
 ##############################################################################
