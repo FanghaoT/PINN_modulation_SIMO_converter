@@ -55,10 +55,6 @@ def get_dataset(data_path):
     in_tensors = torch.from_numpy(temp_input).view(-1, 5)
     out_tensors = torch.from_numpy(temp_output).view(-1, 3)
 
-    # # Save dataset for future use
-    np.save("dataset.fc.in.npy", in_tensors.numpy())
-    np.save("dataset.fc.out.npy", out_tensors.numpy())
-
     return torch.utils.data.TensorDataset(in_tensors, out_tensors)
 
 
@@ -85,8 +81,6 @@ def custom_loss_function(outputs, labels, inputs, criterion, alpha=0.00083761049
     num_constraints = constraint_indices.sum().item()
     penalty_weight = num_constraints / len(inputs)  # Proportional weight
 
-    # Dynamically scale penalty relative to MSE
-    # penalty_weight = penalty.item()/(loss.item() + 1e-8)
     total_loss = loss + alpha * penalty_weight * penalty
 
     return total_loss
@@ -170,7 +164,7 @@ def main():
         epoch_train_loss1 = 0
         epoch_train_loss2 = 0
         epoch_train_loss3 = 0
-        # epoch_train_loss4 = 0
+
 
 
         net.train()
@@ -184,7 +178,6 @@ def main():
             loss1 = criterion(outputs[:,0], labels[:,0].to(device))
             loss2 = criterion(outputs[:,1], labels[:,1].to(device))
             loss3 = criterion(outputs[:,2], labels[:,2].to(device))
-            # loss4 = criterion(outputs[:,3], labels[:,3].to(device))
             loss.backward()
             optimizer.step()
 
@@ -335,11 +328,6 @@ def main():
     print(f"Saved full data with measurements and predictions to '{csv_file_path}'")
 
 
-    # Assuming other parts of the script remain unchanged
-
-    # Your DataFrame 'df' has been already created and populated with values
-    # Let's generate scatter plots for each output variable
-
     output_columns = ['y_meas_0', 'y_pred_0', 'y_meas_1', 'y_pred_1', 'y_meas_2', 'y_pred_2']
     colors = ['red', 'blue', 'green']
 
@@ -446,10 +434,6 @@ def main():
     print(f"Saved full data with measurements and predictions to '{csv_file_path}'")
 
 
-    # Assuming other parts of the script remain unchanged
-
-    # Your DataFrame 'df' has been already created and populated with values
-    # Let's generate scatter plots for each output variable
 
     output_columns = ['y_meas_0', 'y_pred_0', 'y_meas_1', 'y_pred_1', 'y_meas_2', 'y_pred_2']
     colors = ['red', 'blue', 'green']
@@ -555,11 +539,6 @@ def main():
     df.to_csv(csv_file_path, index=False)
     print(f"Saved full data with measurements and predictions to '{csv_file_path}'")
 
-
-    # Assuming other parts of the script remain unchanged
-
-    # Your DataFrame 'df' has been already created and populated with values
-    # Let's generate scatter plots for each output variable
 
     output_columns = ['y_meas_0', 'y_pred_0', 'y_meas_1', 'y_pred_1', 'y_meas_2', 'y_pred_2']
     colors = ['red', 'blue', 'green']
