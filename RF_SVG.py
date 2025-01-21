@@ -11,12 +11,7 @@ import os
 from sklearn.svm import SVR
 
 def train_and_evaluate(method="RF",dataset='small'):
-    """
-    Train and evaluate the model using the specified method.
 
-    Parameters:
-        method (str): Regression method, "RF" for Random Forest or "SVR" for Support Vector Regression.
-    """
     rawdata_train = pd.read_csv(os.path.join(f'normalized_{dataset}.csv'))
     
     # Features and target variable for training
